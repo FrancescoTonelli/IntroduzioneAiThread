@@ -10,8 +10,17 @@ public class Program
     MyThread tr1 = new MyThread();
 
     //due metodi associati alla classe MyThread
-    Thread1 t1 = new Thread1(new ThreadStart(tr1.Thread1));
-    Thread1 t2 = new Thread2(new ThreadStart(tr1.Thread2));
+    Thread t1 = new Thread(new ThreadStart(tr1.Thread1));
+    Thread t2 = new Thread(new ThreadStart(tr1.Thread2));
+
+    //Avvio thread
+    t1.Start();
+    t2.Start();
+
+    for(int i = 0; i < 10; i++)
+    {
+      Console.WriteLine("Main {0}",i);
+    }
   }
 }
 
