@@ -15,16 +15,17 @@ namespace IntroduzioneThread
   
 
             t1.Start(); //Avvia primo thread
+            t1.Join(); //Aspetta che finisca il t1
             t2.Start(); //Avvia secondo thread
 
 
             //l'uccisione di un processo spesso genera un'eccezione, quindi
-            try{
+            /*try{
               t1.Abort();
             }
             catch{
               Console.WriteLine("Eccezione per l'uccisione di un thread");
-            }
+            }*/
 
 
             //Ciclo che verrà eseguito in parallelo
