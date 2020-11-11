@@ -1,44 +1,45 @@
 using System;
-using System.Threading; //per lavorare coi thread
+using System.Threading; //Thread
 
-public class Program 
+namespace IntroduzioneThread
 {
-  public static void Main (string[] args) 
-  {
-    Console.WriteLine("Prima di avviare i thread");
-    //Istanzio la classe
-    MyThread tr1 = new MyThread();
-
-    //due metodi associati alla classe MyThread
-    Thread t1 = new Thread(new ThreadStart(tr1.Thread1));
-    Thread t2 = new Thread(new ThreadStart(tr1.Thread2));
-
-    //Avvio thread
-    t1.Start();
-    t2.Start();
-
-    for(int i = 0; i < 10; i++)
+    class Program
     {
-      Console.WriteLine("Main {0}",i);
-    }
-  }
-}
+        static void Main(string[] args)
+        {
+                                       // Delegato      // Metodo
+            Thread t1 = new Thread(new ThreadStart(Threads.PrimoThread));   //Oggetto per il primo thread, si riferisce al metodo "Threads.PrimoThread"
+            Thread t2 = new Thread(new ThreadStart(Threads.SecondoThread)); //Oggetto per il secondo thread, si riferisce al metodo "Threads.SecondoThread"
 
-public class MyThread //classe che contiene i thread
-{
-  public static void Thread1()
-  {
-    for(int i = 0; i < 10; i++)
-    {
-      Console.WriteLine("Thread1 {0}", i);
-    }
-  } //i thread non hanno parametri
+            t1.Start(); //Avvia primo thread
+            t2.Start(); //Avvia secondo thread
 
-  public static void Thread2()
-  {
-    for(int i = 0; i < 10; i++)
-    {
-      Console.WriteLine("Thread2 {0}", i);
+            //Ciclo che verrà eseguito in parallelo
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("Main: " + i);
+            }
+
+            Console.ReadKey();
+        }
     }
-  }
+
+    class Threads //Classe che contiene i thread che verranno lanciati
+    {
+        public static void PrimoThread() //Metodo del primo thread
+        {
+            for(int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("Thread 1: " + i);
+            }
+        }
+
+        public static void SecondoThread() //Metodo del secondo thread
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine("Thread 2: " + i);
+            }
+        }
+    }
 }
